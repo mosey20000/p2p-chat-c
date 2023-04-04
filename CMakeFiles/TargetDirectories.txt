@@ -1,3 +1,0 @@
-/home/seeembad/p2p-chat-c/CMakeFiles/C_P2P_Chat.dir
-/home/seeembad/p2p-chat-c/CMakeFiles/edit_cache.dir
-/home/seeembad/p2p-chat-c/CMakeFiles/rebuild_cache.dir
