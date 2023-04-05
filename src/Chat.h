@@ -1,7 +1,7 @@
 #ifndef C_P2P_CHAT_CHAT_H
 #define C_P2P_CHAT_CHAT_H
 
-#include <ncursesw/curses.h>
+#include <curses.h>
 #include <locale.h> 
 #include <stdio.h>  
 #include <stdlib.h> 
