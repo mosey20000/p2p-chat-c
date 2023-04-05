@@ -1,15 +1,15 @@
 #ifndef C_P2P_CHAT_CHAT_H
 #define C_P2P_CHAT_CHAT_H
 
-#include <ncursesw/curses.h> // Interface in terminal
-#include <locale.h> // setLocale()
-#include <stdio.h>  // printf()
-#include <stdlib.h> // atoi()
-#include <string.h> // strcmp()
-#include <unistd.h> // read(), close()
-#include <fcntl.h>  // fcntl()
-#include <arpa/inet.h> // struct sockaddr_in
-#include <sys/ioctl.h> // ioctl()
+#include <ncursesw/curses.h>
+#include <locale.h> 
+#include <stdio.h>  
+#include <stdlib.h> 
+#include <string.h> 
+#include <unistd.h> 
+#include <fcntl.h>  
+#include <arpa/inet.h> 
+#include <sys/ioctl.h> 
 
 #include "Config.h"
 #include "Clients.h"
