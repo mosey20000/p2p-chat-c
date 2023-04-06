@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     char* source_ip = inet_ntoa(local_address.sin_addr);
 
     updateInfoBox((char *) &name, source_ip, source_port);
-
+    addClient(&buf_address, (char *) &name);
     // Устанавливаем неблокирующий флаг дискрипторам
     setNonblockFlag(sockfd);
     setNonblockFlag(0);
@@ -95,6 +95,9 @@ int main(int argc, char *argv[]) {
                     if (!existClient(&buf_address)) {
                         strcpy((char *) &buf_name, buf_read + 1);
                         addClient(&buf_address, (char *) &buf_name);
+                        if (strcmp(buf_name, name) == 0) {
+                            break;
+                        }
                         updateClientBox();
                         sprintf((char *) &buf_send, "Подключился клиент %s [%s:%d]", buf_name, buf_ip, buf_port);
                         addMessage((char *) &buf_send);
@@ -120,6 +123,9 @@ int main(int argc, char *argv[]) {
                     break;
                 case PACKET_SEND_MESSAGE:
                     getName(client, (char *) &buf_name);
+                    if (strcmp(buf_name, name) == 0) {
+                        break;
+                    }
                     sprintf((char *) &buf_send, "%s: %s", buf_name, buf_read + 1);
                     addMessage(buf_send);
                     break;
