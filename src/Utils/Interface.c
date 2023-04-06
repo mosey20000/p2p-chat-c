@@ -80,14 +80,14 @@ void updateInfoBox(const char* name, const char* ip, int port) {
     wclear(box_info);
     box(box_info, 0, 0);
     // Печатаем адрес
-    mvwprintw(box_info, 1, 1, "Ваш адрес: ");
-    mvwprintw(box_info, 1, 13, ip);
-    char str_port[5];
-    sprintf((char *) &str_port, "%d", port);
-    mvwprintw(box_info, 1, 13 + (int) strlen(ip), ":");
-    mvwprintw(box_info, 1, 14 + (int) strlen(ip) , str_port);
+    // mvwprintw(box_info, 1, 1, "Ваш адрес: ");
+    // mvwprintw(box_info, 1, 13, ip);
+    // char str_port[5];
+    // sprintf((char *) &str_port, "%d", port);
+    // mvwprintw(box_info, 1, 13 + (int) strlen(ip), ":");
+    // mvwprintw(box_info, 1, 14 + (int) strlen(ip) , str_port);
     // Печатаем имя
-    mvwprintw(box_info, 2, 1, "Ваш ник: ");
+    mvwprintw(box_info, 2, 1, "  Ваш ник: ");
     mvwprintw(box_info, 2, 13, name);
 
     wrefresh(box_info);

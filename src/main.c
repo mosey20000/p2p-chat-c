@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
     char* source_ip = inet_ntoa(local_address.sin_addr);
 
     updateInfoBox((char *) &name, source_ip, source_port);
-
+    addClient(&buf_address, (char *) &name);
     // Устанавливаем неблокирующий флаг дискрипторам
     setNonblockFlag(sockfd);
     setNonblockFlag(0);
