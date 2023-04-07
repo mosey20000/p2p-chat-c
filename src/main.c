@@ -155,28 +155,6 @@ int main(int argc, char *argv[]) {
             memset(buf_input, 0, 100);
             size_input = 0;
         }
-        // Проверяем активность клиентов
-        if (timeToSendPing-- <= 0) {
-            // Уменьшаем всем активным клиентам 'active'
-            for (int i = 0; i < 20; i++) {
-                // Если клиент долго не присылал PACKET_PING
-                if (clients[i].isActive == 1) {
-                    // Счиатем его отключившимся
-                    createSimplePacket(PACKET_TIMEOUT, (char *) &buf_send);
-                    sendPacket(sockfd, (char *) &buf_send, 1);
-                    removeClient(&clients[i]);
-                    sprintf((char *) &buf_send, "Клиент %s отключен. Timeout.", clients[i].name);
-                    addMessage((char *) &buf_send);
-                }else if(clients[i].isActive > 1) {
-                    // Отправляем пакет PING
-                    clients[i].isActive--;
-                    createSimplePacket(PACKET_PING, (char *) &buf_send);
-                    sendPacket(sockfd, (char *) &buf_send, 1);
-                }
-            }
-            timeToSendPing = SEND_PING_PAUSE;
-        }
-
     }
     close_socket(sockfd);
     interface_close();
