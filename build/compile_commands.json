@@ -1,0 +1,44 @@
+[
+{
+  "directory": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_P2P_Chat.dir/src/main.c.o -c \"/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/main.c\"",
+  "file": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/main.c",
+  "output": "CMakeFiles/C_P2P_Chat.dir/src/main.c.o"
+},
+{
+  "directory": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_P2P_Chat.dir/src/Chat.c.o -c \"/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Chat.c\"",
+  "file": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Chat.c",
+  "output": "CMakeFiles/C_P2P_Chat.dir/src/Chat.c.o"
+},
+{
+  "directory": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_P2P_Chat.dir/src/Clients.c.o -c \"/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Clients.c\"",
+  "file": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Clients.c",
+  "output": "CMakeFiles/C_P2P_Chat.dir/src/Clients.c.o"
+},
+{
+  "directory": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_P2P_Chat.dir/src/Network/Socket.c.o -c \"/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Network/Socket.c\"",
+  "file": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Network/Socket.c",
+  "output": "CMakeFiles/C_P2P_Chat.dir/src/Network/Socket.c.o"
+},
+{
+  "directory": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_P2P_Chat.dir/src/Network/Packet.c.o -c \"/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Network/Packet.c\"",
+  "file": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Network/Packet.c",
+  "output": "CMakeFiles/C_P2P_Chat.dir/src/Network/Packet.c.o"
+},
+{
+  "directory": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_P2P_Chat.dir/src/Utils/Utils.c.o -c \"/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Utils/Utils.c\"",
+  "file": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Utils/Utils.c",
+  "output": "CMakeFiles/C_P2P_Chat.dir/src/Utils/Utils.c.o"
+},
+{
+  "directory": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build",
+  "command": "/usr/bin/gcc   -g -std=gnu11 -o CMakeFiles/C_P2P_Chat.dir/src/Utils/Interface.c.o -c \"/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Utils/Interface.c\"",
+  "file": "/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/src/Utils/Interface.c",
+  "output": "CMakeFiles/C_P2P_Chat.dir/src/Utils/Interface.c.o"
+}
+]

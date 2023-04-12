@@ -16,7 +16,6 @@ int main(int argc, char *argv[]) {
         escape("Необходимо ввести имя: -name <имя>");
     }
 
-
     fflush(stdin);
     interface_init();
 
@@ -46,6 +45,7 @@ int main(int argc, char *argv[]) {
 
     updateInfoBox((char *) &name, source_ip, source_port);
     addClient(&buf_address, (char *) &name);
+
     // Устанавливаем неблокирующий флаг дискрипторам
     setNonblockFlag(sockfd);
     setNonblockFlag(0);
@@ -58,9 +58,10 @@ int main(int argc, char *argv[]) {
         addMessage((char *) &buf_send);
 
         connectToClient(sockfd, &buf_address, (char *) &name);
-    }else {
+    } else {
         addMessage("Ждем подключения");
     }
+
     int timeToSendPing = SEND_PING_PAUSE;
     while (1) {
         unsigned int address_size = sizeof(local_address);
@@ -135,7 +136,6 @@ int main(int argc, char *argv[]) {
                     break;
                 case PACKET_LIST_USERS:
                     buf_send_size = createConnectRequestPacket((char *) &buf_send, (char *) &name);
-                    // Загружаем клиентов
                     int count =  buf_read[1];
                     for (int i = 0; i < count; i++) {
                         memcpy(&(buf_address), buf_read + 2, sizeof(struct sockaddr_in));
@@ -147,15 +147,35 @@ int main(int argc, char *argv[]) {
         static int size_input = 0;
         static char buf_input[100] = {0};
         while (readInput((char *) buf_input, &size_input) == 1) {
+            if (strcmp(buf_input, "/quit") == 0) {
+                close_socket(sockfd);
+                interface_close();
+                return 0;
+            }
             sprintf((char *) &buf_send, "Вы: %s", buf_input);
-
             addMessage((char *) &buf_send);
             createMessagePacket((char *) &buf_send, (char *) &buf_input, size_input);
             sendPacket(sockfd, (char *) &buf_send, size_input + 1);
             memset(buf_input, 0, 100);
             size_input = 0;
         }
-        
+
+        // if (timeToSendPing-- <= 0) {
+        //     for (int i = 0; i < 20; i++) {
+        //         if (clients[i].isActive == 1) {
+        //             createSimplePacket(PACKET_TIMEOUT, (char *) &buf_send);
+        //             sendPacket(sockfd, (char *) &buf_send, 1);
+        //             removeClient(&clients[i]);
+        //             sprintf((char *) &buf_send, "Клиент %s отключен. Timeout.", clients[i].name);
+        //             addMessage((char *) &buf_send);
+        //         } else if (clients[i].isActive > 1) {
+        //             clients[i].isActive--;
+        //             createSimplePacket(PACKET_PING, (char *) &buf_send);
+        //             sendPacket(sockfd, (char *) &buf_send, 1);
+        //         }
+        //     }
+        //     timeToSendPing = SEND_PING_PAUSE;
+        // }
     }
     close_socket(sockfd);
     interface_close();
