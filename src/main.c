@@ -155,6 +155,7 @@ int main(int argc, char *argv[]) {
             memset(buf_input, 0, 100);
             size_input = 0;
         }
+        
     }
     close_socket(sockfd);
     interface_close();
