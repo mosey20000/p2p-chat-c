@@ -6,16 +6,16 @@ void escape(const char* error) {
     exit(EXIT_FAILURE);
 }
 
-void connectToClient(int sockfd, const struct sockaddr_in* addr, const char* name) {
+void connect_to_client(int sockfd, const struct sockaddr_in* addr, const char* name) {
     // Буффер для сообщений
     char buf[100];
     // Длина принятых/отправляемых данных
     int buf_size = 0;
 
     while (1) {
-        buf_size = createConnectRequestPacket((char *) &buf, name);
+        buf_size = create_connect_request_packet((char *) &buf, name);
         send_udp(sockfd, addr, buf, buf_size);
-        // addMessage("Запрос на подключение отправлен");
+        // add_message("Запрос на подключение отправлен");
         sleep(2);
 
         struct sockaddr_in buf_address = {0};
@@ -23,28 +23,28 @@ void connectToClient(int sockfd, const struct sockaddr_in* addr, const char* nam
         // Получаем все данные из сокета
         while ((buf_size = socket_read(sockfd, (char *) &buf, &buf_address, &address_size)) != -1) {
             buf[buf_size] = '\0';
-            int packet_id = getPacketId((char *) &buf);
-            if (packet_id == PACKET_CONNECT_ACCEPT && isEquivalAddr(addr, &buf_address)) {
+            int packet_id = get_packet_id((char *) &buf);
+            if (packet_id == PACKET_CONNECT_ACCEPT && is_equal_address(addr, &buf_address)) {
 
                 char buf_name[MAX_NAME_LENGTH * 2];
                 strcpy((char *) &buf_name, buf + 1);
-                addClient(&buf_address, (char *) &buf_name);
-                updateClientBox();
+                add_client(&buf_address, (char *) &buf_name);
+                update_client_box();
 
                 sprintf((char *) &buf, "Подключились к %s", buf_name);
-                addMessage((char *) &buf);
+                add_message((char *) &buf);
 
                 // Отправляем запрос на получение клиентов
-                buf_size = createSimplePacket(PACKET_REQUEST_USERS, (char *) &buf);
+                buf_size = create_simple_packet(PACKET_REQUEST_USERS, (char *) &buf);
                 send_udp(sockfd, addr, buf, buf_size);
                 return;
             }
         }
-        // addMessage("Нет ответа от клиента");
+        // add_message("Нет ответа от клиента");
     }
 }
 
-void sendPacket(int sockfd, const char* buf, int buf_size) {
+void send_packet(int sockfd, const char* buf, int buf_size) {
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].isActive > 0) {
             send_udp(sockfd, &(clients[i].address), buf, buf_size);

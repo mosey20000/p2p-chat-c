@@ -22,12 +22,12 @@ void send_udp(int sockfd, const struct sockaddr_in *addr, const char *buf, int b
 int socket_read(int sockfd, char *buf, struct sockaddr_in* addr, unsigned int *addr_len);
 
 /// Установка неблокирующего флага дескриптору
-void setNonblockFlag(int descriptor);
+void sen_nonblock_flag(int descriptor);
 
 /// Одинаковы ли два адреса
-int isEquivalAddr(const struct sockaddr_in* first, const struct sockaddr_in* second);
+int is_equal_address(const struct sockaddr_in* first, const struct sockaddr_in* second);
 
 /// Создаем структуру адреса
-void createAddress(const char* ip, int port, struct sockaddr_in* addr);
+void create_adress(const char* ip, int port, struct sockaddr_in* addr);
 
 #endif //C_P2P_CHAT_SOCKET_H

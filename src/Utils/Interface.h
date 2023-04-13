@@ -6,11 +6,11 @@
 void interface_init();
 void interface_close();
 
-void updateClientBox();
-void updateInfoBox(const char* name, const char* ip, int port);
+void update_client_box();
+void update_info_box(const char* name, const char* ip, int port);
 
-void addMessage(const char* msg);
+void add_message(const char* msg);
 
-int readInput(char* buf, int* size);
+int read_input_box(char* buf, int* size);
 
 #endif //C_P2P_CHAT_INTERFACE_H

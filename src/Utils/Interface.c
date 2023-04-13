@@ -7,13 +7,13 @@ static WINDOW* box_input = NULL;
 
 static char messages[16][126] = {{0}};
 
-static void initInfoBox() {
+static void init_info_box() {
     box_info = newwin(5, 65, 0, 0);
     box(box_info, 0, 0);
     wrefresh(box_info);
 }
 
-static void initClientBox() {
+static void init_client_box() {
     box_client = newwin(25, 15, 0, 65);
     box(box_client, 0, 0);
     mvwprintw(box_client, 1, 1, "   Клиенты   ");
@@ -21,7 +21,7 @@ static void initClientBox() {
     wrefresh(box_client);
 }
 
-static void initMessageBox() {
+static void init_message_box() {
     box_messages = newwin(17, 65, 5, 0);
     box(box_messages, 0, 0);
     mvwprintw(box_messages, 16, 0, "│                                                               │");
@@ -29,7 +29,7 @@ static void initMessageBox() {
     wrefresh(box_messages);
 }
 
-static void initInputBox() {
+static void init_inpit_box() {
     box_input = newwin(3, 65, 22, 0);
     box(box_input, 0, 0);
     mvwprintw(box_input, 0, 0, "├───────────────────────────────────────────────────────────────┤");;
@@ -37,7 +37,7 @@ static void initInputBox() {
     wrefresh(box_input);
 }
 
-void updateClientBox() {
+void update_client_box() {
     wclear(box_client);
     box(box_client, 0, 0);
     mvwprintw(box_client, 1, 1, "   Клиенты   ");
@@ -53,7 +53,7 @@ void updateClientBox() {
     wrefresh(box_client);
 }
 
-static void updateMessageBox() {
+static void update_message_box() {
     wclear(box_messages);
     box(box_messages, 0, 0);
     mvwprintw(box_messages, 16, 0, "│                                                               │");
@@ -64,17 +64,17 @@ static void updateMessageBox() {
     wrefresh(box_messages);
 }
 
-void addMessage(const char* msg) {
+void add_message(const char* msg) {
     for (int i = 1; i < 16; i++) {
         memset((char *) &messages[i - 1], ' ', sizeof(char) * 18);
         strcpy((char *) &messages[i - 1], (char *) &messages[i]);
     }
     strcpy((char *) &messages[15], msg);
-    updateMessageBox();
+    update_message_box();
 }
 
 
-void updateInfoBox(const char* name, const char* ip, int port) {
+void update_info_box(const char* name, const char* ip, int port) {
     wclear(box_info);
     box(box_info, 0, 0);
     mvwprintw(box_info, 2, 1, "  Ваш ник: ");
@@ -90,10 +90,10 @@ void interface_init() {
 
     initscr();
 
-    initInfoBox();
-    initMessageBox();
-    initClientBox();
-    initInputBox();
+    init_info_box();
+    init_message_box();
+    init_client_box();
+    init_inpit_box();
 
     keypad(box_input, TRUE);
     echo();
@@ -101,7 +101,7 @@ void interface_init() {
     wtimeout(box_input, 1000 / TICK_PER_SECOND);  // wait 100 milliseconds for input
 }
 
-int readInput(char* buf, int* size) {
+int read_input_box(char* buf, int* size) {
     int symbol = 0;
     // getch (c cbreak и timeout)
     // ждет 100мс и возвращает ERR если ничего не введено

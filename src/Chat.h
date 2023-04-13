@@ -23,10 +23,10 @@ void escape(const char* error);
 
 /// Функция нужна для подключения к клиенту
 /// Отправляет запрос на подключение, пока не получит ответ
-void connectToClient(int sockfd, const struct sockaddr_in* addr, const char* name);
+void connect_to_client(int sockfd, const struct sockaddr_in* addr, const char* name);
 
 /// Отправляем пакет всем клиентам
-void sendPacket(int sockfd, const char* buf, int buf_size);
+void send_packet(int sockfd, const char* buf, int buf_size);
 
 
 #endif //C_P2P_CHAT_CHAT_H

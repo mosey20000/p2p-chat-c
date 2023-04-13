@@ -31,20 +31,20 @@
 #define PACKET_SEND_MESSAGE '7'
 
 /// Получаем id пакета
-int getPacketId(const char* data);
+int get_packet_id(const char* data);
 
 /// Записываем в буффер пакет
 /// Возвращаем кол-во записанных байт
 
 // Функция для простых однобайтовых пакетов
-int createSimplePacket(char type, char* buf);
+int create_simple_packet(char type, char* buf);
 
-int createConnectRequestPacket(char* buf, const char* name);
-int createConnectAcceptPacket(char* buf, const char* name);
+int create_connect_request_packet(char* buf, const char* name);
+int create_connect_accept_packet(char* buf, const char* name);
 
-int createMessagePacket(char* buf_send, char* buf_input, int len_msg);
+int create_message_packet(char* buf_send, char* buf_input, int len_msg);
 
-int createListUsersPacket(char* buf);
+int create_list_users_packet(char* buf);
 
 
 #endif //C_P2P_CHAT_PACKET_H
