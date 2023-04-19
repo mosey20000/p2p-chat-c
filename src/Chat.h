@@ -17,15 +17,10 @@
 #include "Network/Socket.h"
 #include "Utils/Interface.h"
 
-/// Функция завершает выполнение программы
-/// Выведя при этом строку error
 void escape(const char* error);
 
-/// Функция нужна для подключения к клиенту
-/// Отправляет запрос на подключение, пока не получит ответ
 void connect_to_client(int sockfd, const struct sockaddr_in* addr, const char* name);
 
-/// Отправляем пакет всем клиентам
 void send_packet(int sockfd, const char* buf, int buf_size);
 
 

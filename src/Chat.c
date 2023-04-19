@@ -7,20 +7,16 @@ void escape(const char* error) {
 }
 
 void connect_to_client(int sockfd, const struct sockaddr_in* addr, const char* name) {
-    // Буффер для сообщений
     char buf[100];
-    // Длина принятых/отправляемых данных
     int buf_size = 0;
 
     while (1) {
         buf_size = create_connect_request_packet((char *) &buf, name);
         send_udp(sockfd, addr, buf, buf_size);
-        // add_message("Запрос на подключение отправлен");
         sleep(2);
 
         struct sockaddr_in buf_address = {0};
         unsigned int address_size = sizeof(struct sockaddr_in); // Оказывается нужна инициализация!!!
-        // Получаем все данные из сокета
         while ((buf_size = socket_read(sockfd, (char *) &buf, &buf_address, &address_size)) != -1) {
             buf[buf_size] = '\0';
             int packet_id = get_packet_id((char *) &buf);
@@ -34,13 +30,11 @@ void connect_to_client(int sockfd, const struct sockaddr_in* addr, const char* n
                 sprintf((char *) &buf, "Подключились к %s", buf_name);
                 add_message((char *) &buf);
 
-                // Отправляем запрос на получение клиентов
                 buf_size = create_simple_packet(PACKET_REQUEST_USERS, (char *) &buf);
                 send_udp(sockfd, addr, buf, buf_size);
                 return;
             }
         }
-        // add_message("Нет ответа от клиента");
     }
 }
 

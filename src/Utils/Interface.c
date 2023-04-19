@@ -103,18 +103,13 @@ void interface_init() {
 
 int read_input_box(char* buf, int* size) {
     int symbol = 0;
-    // getch (c cbreak и timeout)
-    // ждет 100мс и возвращает ERR если ничего не введено
     while ((symbol = wgetch(box_input)) != ERR) {
         if (symbol == '\n') {
-            // Добавляем сообщение
-            // Отчищаем буфер
             for (int i = 0; i < *size; i++) {
                 mvwprintw(box_input, 1, i + 1, " ");
             }
             return 1;
         }else if (symbol == KEY_BACKSPACE) {
-            // Удаляем последний элемент
             if (*size > 0) {
                 mvwprintw(box_input, 1, (*size), " ");
                 buf[--(*size)] = 0;

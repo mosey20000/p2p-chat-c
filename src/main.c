@@ -19,26 +19,18 @@ int main(int argc, char *argv[]) {
     fflush(stdin);
     interface_init();
 
-    // Адрес локального сокета
     struct sockaddr_in local_address;
-    // Адрес куда/откуда будем отправлять/получать данные
-    // Будет перезаписываться в разных функциях
     struct sockaddr_in buf_address;
 
-    // Буффер для сообщений
     char buf_read[BUFLEN] = {0};
     char buf_send[BUFLEN] = {0};
-    // Буффер для имени
     char buf_name[MAX_NAME_LENGTH] = {0};
 
-    // Длина принятых/отправляемых данных
     int buf_read_size = 0;
     int buf_send_size = 0;
 
-    // Создаем сокет
     int sockfd = create_socket();
 
-    // Привязываем адрес к сокету
     bind_address(sockfd, &local_address, source_port);
 
     char* source_ip = inet_ntoa(local_address.sin_addr);
@@ -46,11 +38,9 @@ int main(int argc, char *argv[]) {
     update_info_box((char *) &name, source_ip, source_port);
     add_client(&buf_address, (char *) &name);
 
-    // Устанавливаем неблокирующий флаг дискрипторам
     sen_nonblock_flag(sockfd);
     sen_nonblock_flag(0);
 
-    // Если задан ip - патыаеся подключиться
     if (connect_ip != NULL) {
         create_adress(connect_ip, connect_port, &buf_address);
 
@@ -65,9 +55,7 @@ int main(int argc, char *argv[]) {
     int timeToSendPing = SEND_PING_PAUSE;
     while (1) {
         unsigned int address_size = sizeof(local_address);
-        // Получаем все данные из сокета
         while ((buf_read_size = socket_read(sockfd, (char *) &buf_read, &buf_address, &address_size)) != -1) {
-            // Не принимаем пакеты от себя же
             if (is_equal_address(&local_address, &buf_address)) {
                 continue;
             }
@@ -75,12 +63,10 @@ int main(int argc, char *argv[]) {
 
             struct Client* client = get_client(&buf_address);
 
-            // Если пришел пакет от неавторизованного клиента, и пакет не запрос на авторизацию
             if (client == NULL && packet_id != PACKET_CONNECT_REQUES && packet_id != PACKET_CONNECT_ACCEPT) {
                 continue;
             }
 
-            // Обновляем данные для таймаута
             if (client != NULL) {
                 if (packet_id != PACKET_PING) {
                     create_simple_packet(PACKET_PING, (char *) &buf_send);
@@ -167,7 +153,7 @@ int main(int argc, char *argv[]) {
         //             send_packet(sockfd, (char *) &buf_send, 1);
         //             remove_client(&clients[i]);
         //             sprintf((char *) &buf_send, "Клиент %s отключен. Timeout.", clients[i].name);
-        //             addMessage((char *) &buf_send);
+        //             add_message((char *) &buf_send);
         //         } else if (clients[i].isActive > 1) {
         //             clients[i].isActive--;
         //             create_simple_packet(PACKET_PING, (char *) &buf_send);

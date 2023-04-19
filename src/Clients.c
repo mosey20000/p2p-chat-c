@@ -1,15 +1,11 @@
 #include "Clients.h"
 
 
-// NOTICE: Из-за {} вызовется агрегатная инициализация,
-// которая для каждого элемента структуры вызовет zero-initialization
 struct Client clients[MAX_CLIENTS] = {0};
-
 
 void add_client(const struct sockaddr_in* addr, const char* name) {
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].isActive <= 0) {
-            // Копируем адрес
             memcpy(&(clients[i].address), addr, sizeof(struct sockaddr_in));
             strcpy((char *) &(clients[i].name), name);
             clients[i].isActive = PING_SKIP_TO_TIMEOUT;
