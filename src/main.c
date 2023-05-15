@@ -146,22 +146,22 @@ int main(int argc, char *argv[]) {
             size_input = 0;
         }
 
-        // if (timeToSendPing-- <= 0) {
-        //     for (int i = 0; i < 20; i++) {
-        //         if (clients[i].isActive == 1) {
-        //             create_simple_packet(PACKET_TIMEOUT, (char *) &buf_send);
-        //             send_packet(sockfd, (char *) &buf_send, 1);
-        //             remove_client(&clients[i]);
-        //             sprintf((char *) &buf_send, "Клиент %s отключен. Timeout.", clients[i].name);
-        //             add_message((char *) &buf_send);
-        //         } else if (clients[i].isActive > 1) {
-        //             clients[i].isActive--;
-        //             create_simple_packet(PACKET_PING, (char *) &buf_send);
-        //             send_packet(sockfd, (char *) &buf_send, 1);
-        //         }
-        //     }
-        //     timeToSendPing = SEND_PING_PAUSE;
-        // }
+        if (timeToSendPing-- <= 0) {
+            for (int i = 0; i < 20; i++) {
+                if (clients[i].isActive == 1) {
+                    create_simple_packet(PACKET_TIMEOUT, (char *) &buf_send);
+                    send_packet(sockfd, (char *) &buf_send, 1);
+                    remove_client(&clients[i]);
+                    sprintf((char *) &buf_send, "Клиент %s отключен. Timeout.", clients[i].name);
+                    add_message((char *) &buf_send);
+                } else if (clients[i].isActive > 1) {
+                    clients[i].isActive--;
+                    create_simple_packet(PACKET_PING, (char *) &buf_send);
+                    send_packet(sockfd, (char *) &buf_send, 1);
+                }
+            }
+            timeToSendPing = SEND_PING_PAUSE;
+        }
     }
     close_socket(sockfd);
     interface_close();

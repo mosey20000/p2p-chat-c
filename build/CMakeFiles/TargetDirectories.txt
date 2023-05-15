@@ -1,3 +1,0 @@
-/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build/CMakeFiles/C_P2P_Chat.dir
-/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build/CMakeFiles/edit_cache.dir
-/home/seeembad/Максимчик Е.В./course-project/p2p-chat-c/build/CMakeFiles/rebuild_cache.dir
