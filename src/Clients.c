@@ -3,9 +3,11 @@
 
 struct Client clients[MAX_CLIENTS] = {0};
 
+
 void add_client(const struct sockaddr_in* addr, const char* name) {
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].isActive <= 0) {
+            // Копируем адрес
             memcpy(&(clients[i].address), addr, sizeof(struct sockaddr_in));
             strcpy((char *) &(clients[i].name), name);
             clients[i].isActive = PING_SKIP_TO_TIMEOUT;
@@ -19,7 +21,7 @@ struct Client* get_client(const struct sockaddr_in* addr) {
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].isActive > 0) {
             // Сравниваем ip
-            if (is_equal_address(addr, &(clients[i].address))) {
+            if (is_equival_address(addr, &(clients[i].address))) {
                 return &(clients[i]);
             }
         }
@@ -27,7 +29,7 @@ struct Client* get_client(const struct sockaddr_in* addr) {
     return NULL;
 }
 
-int is_exist(const struct sockaddr_in* addr) {
+int exist_client(const struct sockaddr_in* addr) {
     return get_client(addr) != NULL;
 }
 

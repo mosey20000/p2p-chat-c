@@ -13,10 +13,10 @@ void send_udp(int sockfd, const struct sockaddr_in *addr, const char *buf, int b
 
 int socket_read(int sockfd, char *buf, struct sockaddr_in* addr, unsigned int *addr_len);
 
-void sen_nonblock_flag(int descriptor);
+void set_nonblock_flag(int descriptor);
 
-int is_equal_address(const struct sockaddr_in* first, const struct sockaddr_in* second);
+int is_equival_address(const struct sockaddr_in* first, const struct sockaddr_in* second);
 
-void create_adress(const char* ip, int port, struct sockaddr_in* addr);
+void create_address(const char* ip, int port, struct sockaddr_in* addr);
 
 #endif //C_P2P_CHAT_SOCKET_H

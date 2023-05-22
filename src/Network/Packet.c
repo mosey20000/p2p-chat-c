@@ -32,7 +32,6 @@ int create_list_users_packet(char* buf) {
     buf[1] = 0; // Кол-во клиентов
 
     int pos = 2;
-    // Для всех клиентов
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].isActive > 0) {
             buf[1]++;

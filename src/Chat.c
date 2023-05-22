@@ -20,7 +20,7 @@ void connect_to_client(int sockfd, const struct sockaddr_in* addr, const char* n
         while ((buf_size = socket_read(sockfd, (char *) &buf, &buf_address, &address_size)) != -1) {
             buf[buf_size] = '\0';
             int packet_id = get_packet_id((char *) &buf);
-            if (packet_id == PACKET_CONNECT_ACCEPT && is_equal_address(addr, &buf_address)) {
+            if (packet_id == PACKET_CONNECT_ACCEPT && is_equival_address(addr, &buf_address)) {
 
                 char buf_name[MAX_NAME_LENGTH * 2];
                 strcpy((char *) &buf_name, buf + 1);

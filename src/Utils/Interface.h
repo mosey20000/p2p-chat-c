@@ -11,6 +11,6 @@ void update_info_box(const char* name, const char* ip, int port);
 
 void add_message(const char* msg);
 
-int read_input_box(char* buf, int* size);
+int read_input(char* buf, int* size);
 
 #endif //C_P2P_CHAT_INTERFACE_H

@@ -29,7 +29,7 @@ static void init_message_box() {
     wrefresh(box_messages);
 }
 
-static void init_inpit_box() {
+static void init_input_box() {
     box_input = newwin(3, 65, 22, 0);
     box(box_input, 0, 0);
     mvwprintw(box_input, 0, 0, "├───────────────────────────────────────────────────────────────┤");;
@@ -77,7 +77,13 @@ void add_message(const char* msg) {
 void update_info_box(const char* name, const char* ip, int port) {
     wclear(box_info);
     box(box_info, 0, 0);
-    mvwprintw(box_info, 2, 1, "  Ваш ник: ");
+    mvwprintw(box_info, 1, 1, "Ваш адрес: ");
+    mvwprintw(box_info, 1, 13, ip);
+    char str_port[5];
+    sprintf((char *) &str_port, "%d", port);
+    mvwprintw(box_info, 1, 13 + (int) strlen(ip), ":");
+    mvwprintw(box_info, 1, 14 + (int) strlen(ip) , str_port);
+    mvwprintw(box_info, 2, 1, "Ваш ник: ");
     mvwprintw(box_info, 2, 13, name);
 
     wrefresh(box_info);
@@ -85,7 +91,6 @@ void update_info_box(const char* name, const char* ip, int port) {
 
 void interface_init() {
     setlocale(LC_ALL,"");
-    // Изменяем размер экрана
     printf("\e[8;25;80;t");
 
     initscr();
@@ -93,7 +98,7 @@ void interface_init() {
     init_info_box();
     init_message_box();
     init_client_box();
-    init_inpit_box();
+    init_input_box();
 
     keypad(box_input, TRUE);
     echo();
@@ -101,7 +106,7 @@ void interface_init() {
     wtimeout(box_input, 1000 / TICK_PER_SECOND);  // wait 100 milliseconds for input
 }
 
-int read_input_box(char* buf, int* size) {
+int read_input(char* buf, int* size) {
     int symbol = 0;
     while ((symbol = wgetch(box_input)) != ERR) {
         if (symbol == '\n') {

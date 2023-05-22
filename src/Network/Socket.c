@@ -14,7 +14,7 @@ void bind_address(int sockfd, struct sockaddr_in *addr, int port) {
     memset((char *) addr, 0, sizeof(*addr));
     addr->sin_family = AF_INET;
     addr->sin_port = htons((unsigned short) port); // To network byte order
-    addr->sin_addr.s_addr = htonl(INADDR_ANY);
+    addr->sin_addr.s_addr = htonl(INADDR_LOOPBACK);
 
     int result = bind(sockfd, (struct sockaddr *) addr, sizeof(*addr));
     if (result == -1) escape("Can't bind address");
@@ -29,18 +29,18 @@ int socket_read(int sockfd, char *buf, struct sockaddr_in* addr, unsigned int *a
     return recv_len;
 }
 
-void sen_nonblock_flag(int descriptor) {
+void set_nonblock_flag(int descriptor) {
     int flags = fcntl(descriptor, F_GETFL);
     flags |= O_NONBLOCK;
     fcntl(descriptor, F_SETFL, flags);
 }
 
-int is_equal_address(const struct sockaddr_in* first, const struct sockaddr_in* second) {
+int is_equival_address(const struct sockaddr_in* first, const struct sockaddr_in* second) {
     return  (first->sin_addr.s_addr == second->sin_addr.s_addr) &&
             (first->sin_port == second->sin_port);
 }
 
-void create_adress(const char* ip, int port, struct sockaddr_in* addr) {
+void create_address(const char* ip, int port, struct sockaddr_in* addr) {
     addr->sin_family = AF_INET;
     addr->sin_addr.s_addr = inet_addr(ip);
     addr->sin_port = htons(port);

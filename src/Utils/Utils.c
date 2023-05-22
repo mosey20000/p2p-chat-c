@@ -1,6 +1,6 @@
 #include "Utils.h"
 
-void parse_connect_adress(int argc, char *argv[], char** ip, int* port) {
+void parse_connect_address(int argc, char *argv[], char** ip, int* port) {
     for (int i = 0; i < argc; i++) {
         if (strcmp(argv[i], "-connect") == 0 && (i + 2) <= argc) {
             *ip = argv[i + 1];

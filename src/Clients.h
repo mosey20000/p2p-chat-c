@@ -15,7 +15,7 @@ void add_client(const struct sockaddr_in* addr, const char* name);
 
 struct Client* get_client(const struct sockaddr_in* addr);
 
-int is_exist(const struct sockaddr_in* addr);
+int exist_client(const struct sockaddr_in* addr);
 
 void remove_client(struct Client* client);
 
